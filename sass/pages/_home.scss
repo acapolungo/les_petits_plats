@@ -75,6 +75,7 @@
             width: auto;
             transition: width 0.1s ease;
             margin-right: rem(20);
+            pointer-events:none;
         }
         &__filter {
             width: 100%;

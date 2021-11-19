@@ -3,22 +3,28 @@
 //import des data en JS, de la const receip
 import { recipes } from './recipes.js';
 import { Recipes } from './recipes_class.js';
+import { titleCase } from './utils.js';
 
 /* ============================= Données des recettes  ============================= */
 
-let arrayRecipes = [];
-let uniqueIngredients = [];
-let uniqueUstencils = [];
-let uniqueAppliance = [];
-let selectedTag = "";
 const mapRecipe = new Map();
+let arrayRecipes = [];
+// Tag selectionné dans la recherche avancée
+let selectedTag = "";
+let currentSearchValue = ";"
 const tagIngredients = new Set();
 const tagUstensils = new Set();
 const tagAppliance = new Set();
+let uniqueIngredients = [];
+let uniqueUstencils = [];
+let uniqueAppliance = [];
 
 /* ============================= Constantes applicatives ============================= */
 
 const main = document.querySelector('.main__result');
+const ingContainer = document.querySelector('.search__ingredients');
+const appContainer = document.querySelector('.search__appliance');
+const ustContainer = document.querySelector('.search__ustensils');
 const ingredientsList = document.querySelector('#ingredientsList');
 const applianceList = document.querySelector('#applianceList');
 const ustensilsList = document.querySelector('#ustensilsList');
@@ -26,7 +32,7 @@ const ustensilsList = document.querySelector('#ustensilsList');
 /* ============================= Créer la classe recettes  ============================= */
 
 const allRecipes = createRecipes(recipes);
-renderAllRecipe(recipes)
+renderAllRecipe(allRecipes)
 
 function createRecipes(recipes) {
     return recipes.map(recipes => new Recipes(recipes));
@@ -36,23 +42,20 @@ function createRecipes(recipes) {
 function clearResults() {
     mapRecipe.clear();
     main.innerHTML = "";
-    ingredientsList.innerHTML="";
-    applianceList.innerHTML="";
-    ustensilsList.innerHTML="";
 }
 
 /* ============================= A la recherche principale  ============================= */
 
 function getResults() {
     const searchValue = document.querySelector('.search__bar').value;
+    currentSearchValue = searchValue;
+    //console.log(searchValue.length)
 
     clearResults();
     //console.log(typeof allRecipes === 'undefined')
-    if (allRecipes === undefined) {return;}
+    if (allRecipes === undefined) { return; }
 
     allRecipes.forEach(recipe => {
-        console.log(searchValue.length)
-
         if (searchValue.length >= 3) {
             // Si la recherche passe les 3 test de recherche
             if (recipe.isMatch(searchValue) === true) {
@@ -60,9 +63,10 @@ function getResults() {
                     mapRecipe.set(recipe.id, recipe);
                 }
             }
+
             arrayRecipes = Array.from(mapRecipe, ([name, value]) => (value));
 
-            // =============== Ingrédients, ustenciles et appareils ===============
+            // Recherches avancées Ingrédient / appareils / Ustenciles
             for (let i = 0; i < arrayRecipes.length; i++) {
                 let listIng = arrayRecipes[i].ingredients;
                 let listApp = arrayRecipes[i].appliance;
@@ -70,62 +74,72 @@ function getResults() {
                 tagUstensils.add(listApp)
                 tagAppliance.add(listUst)
                 for (let key of listIng) {
+                    //let capfirstLetterIng = titleCase(key.ingredient)
                     tagIngredients.add(key.ingredient);
                 }
             }
 
             uniqueIngredients = [...tagIngredients];
-            uniqueUstencils = [...tagUstensils].flat(" ");
-            uniqueAppliance = [...tagAppliance];
             //console.log(uniqueIngredient);
+            uniqueUstencils = [...tagUstensils].flat(" ");
             //console.log(uniqueUstencils);
+            uniqueAppliance = [...tagAppliance];
             //console.log(uniqueAppliance);
         }
     });
-    
-    if (searchValue.length <= 2) {
-        renderAllRecipe();
-    } else {
-        renderRecipesHTML(arrayRecipes, uniqueIngredients);
-    }
+    renderRecipesHTML(searchValue, arrayRecipes, uniqueIngredients);
 };
 
 document.querySelector('.search__bar').addEventListener('keyup', getResults);
 
-function renderAllRecipe() {
+/* ============================= Render selon des recherches  ============================= */
+
+function renderAllRecipe(allRecipes) {
     const recipeRender = allRecipes.map(recipe => recipe.templateRecipes()).join("");
     main.innerHTML = recipeRender;
 };
 
-function renderRecipesHTML(arrayRender, arrayList) {
+function renderRecipesHTML(searchValue, arrayRender, arrayList) {
+    if (searchValue.length <= 2) {
+        renderAllRecipe(allRecipes);
+    } else {
         const recipeRender = arrayRender.map(recipe => recipe.templateRecipes()).join("");
+        main.innerHTML = recipeRender;
+
+        ingContainer.style.pointerEvents = "auto";
+        appContainer.style.pointerEvents = "auto";
+        ustContainer.style.pointerEvents = "auto";
+
         const IngredientListRender = arrayList.map((ing) => {
             return `<li class="search__item">${ing}</li>`
         }).join("");
-        //console.log(IngredientListRender)
-    
-        main.innerHTML = recipeRender;
+        const applianceListRender = arrayList.map((ing) => {
+            return `<li class="search__item">${ing}</li>`
+        }).join("");
+        const ustensilsListRender = arrayList.map((ing) => {
+            return `<li class="search__item">${ing}</li>`
+        }).join("");
         ingredientsList.innerHTML = IngredientListRender;
+        applianceList.innerHTML = applianceListRender;
+        ustensilsList.innerHTML = ustensilsListRender;
+    }
 };
 
 /* ============================= A la recherche secondaire Ingrédient  ============================= */
 
-function getRecipeByIng(arrayRecipes) {
-    const filteredRecipeByIng = arrayRecipes.filter(recipe => {
-        return recipe.ingredients.some(ing => ing.ingredient === selected);
+function updateListIngredient(arrayRecipes) {
+    const currentList = arrayRecipes.filter(recipe => {
+        return recipe.ingredients.some(ing => ing.ingredient === selectedTag);
     });
-    console.log(filteredRecipeByIng);
-
-    // =============== Nouveau render ===============
-    const filteredRender = filteredRecipeByIng.map(recipe => recipe.templateRecipes()).join("");
-    main.innerHTML = filteredRender;
+    const filteredListHTML = currentList.map(recipe => recipe.templateRecipes()).join("");
+    main.innerHTML = filteredListHTML;
 }
 
 /* ============================= Recherche par tags Ingédients============================= */
 
 function getTags(e) {
     e.stopPropagation();
-    document.querySelector('.search__ingredients').classList.remove('search__open');
+    ingContainer.classList.remove('search__open');
     document.querySelector('.search__filter--ingredients').classList.remove('search__openfilter');
 
     let targetTag = e.target;
@@ -136,28 +150,36 @@ function getTags(e) {
         const markTag = `<span class="search__tagged search__tagged--ingredients">${selectedTag}<button class="delete">x</button></span>`;
         document.querySelector('.search__tags').innerHTML += markTag;
         document.querySelector('.delete').addEventListener('click', deleteTag);
+        // Mise a jour du Tag ingrédient + render
+        updateListIngredient(arrayRecipes);
     }
-    getRecipeByIng(arrayRecipes);
 };
 
 function deleteTag() {
-    document.querySelector('.search__ingredients').classList.remove('search__open');
+    // Fermer la liste
+    this.classList.remove('search__open');
     document.querySelector('.search__filter--ingredients').classList.remove('search__openfilter');
     document.querySelector('.search__tags').innerHTML = "";
+    // Rendu Toute les recettes
+    renderAllRecipe(allRecipes);
+    // Vider les tags et relancer le rendu
+    renderRecipesHTML(currentSearchValue, arrayRecipes, uniqueIngredients);
 };
 
 /* ============================= Recherche avancée ============================= */
 
-function openListIngredient() {
-    const listIngredients = document.querySelectorAll('.search__list');
-    console.log(listIngredients)
-    if (listIngredients.length > 0) {
-        document.querySelector('.search__ingredients').classList.toggle('search__open');
-        document.querySelector('.search__filter--ingredients').classList.toggle('search__openfilter');
+function openAdvancedList() {
+    const listContainer = document.querySelectorAll('.search__list');
+    //console.log(listIngredients);
+    if (listContainer.length > 0) {
+        console.log(this);
+        if(this === document.querySelector('.search__ingredients')) {
+            this.classList.toggle('search__open');
+            document.querySelector('.search__filter--ingredients').classList.toggle('search__openfilter');
+        }
         document.querySelector('#ingredientsInput').value = '';
         document.querySelector('#ingredientsInput').focus();
-
-        if (document.querySelector('.search__ingredients').classList.contains('search__open')) {
+        if (this.classList.contains('search__open')) {
             document.querySelectorAll('.search__item').forEach(item => {
                 item.addEventListener('click', getTags);
             });
@@ -169,7 +191,9 @@ function openListIngredient() {
     }
 }
 
-document.querySelector('.search__ingredients').addEventListener('click', openListIngredient);
+ingContainer.addEventListener('click', openAdvancedList);
+appContainer.addEventListener('click', openAdvancedList);
+ustContainer.addEventListener('click', openAdvancedList);
 
 /* ============================= Afficher les recettes selon ce qu'on tape ============================= */
 

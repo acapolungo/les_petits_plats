@@ -124,6 +124,7 @@ a a:hover {
   width: auto;
   transition: width 0.1s ease;
   margin-right: 1.25rem;
+  pointer-events: none;
 }
 .header .search__filter {
   width: 100%;
