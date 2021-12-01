@@ -1,7 +1,7 @@
 // ============================= CREER la classe recette et ses méthodes =============================
 
-export class Recipes {
-    constructor({ id, name, servings, ingredients, time, description, appliance, ustensils }) {
+export class Recipe {
+    constructor({ id, name, servings, ingredients, time, description, appliance, ustensils}) {
         this.id = id;
         this.name = name;
         this.servings = servings;
@@ -10,43 +10,58 @@ export class Recipes {
         this.description = description;
         this.appliance = appliance;
         this.ustensils = ustensils;
+        this.tagsIng = [];
+        this.tagsApp = [];
+        this.tagsUst = [];
+        this.seedTags();
     }
+    // isMatch(search) {
+    //     return this.isMatchTitle(search) || this.isMatchIngredient(search) || this.isMatchDescription(search);
+    // }
 
-    isMatch(search) {
-        if (this.isMatchTitle(search) || this.isMatchIngredient(search) || this.isMatchDescription(search)) {
-            //console.log(this)
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // isMatchTitle(search) {
+    //     return this.name.toLowerCase().includes(search.toLowerCase());
+    // }
 
-    isMatchTitle(search) {
-        if (this.name.toLowerCase().includes(search.toLowerCase())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // isMatchIngredient(search) {
+    //     const currentIngredient = this.ingredients;
+    //     let match = false;
+    //     for (let i = 0; i < currentIngredient.length; i++) {
+    //         //console.log(currentIngredient[i].ingredient)
+    //         if (currentIngredient[i].ingredient.toLowerCase().includes(search.toLowerCase())) {
+    //             match = true;
+    //             break;
+    //         }
+    //     }
+    //     return match;
+    // }
 
-    isMatchIngredient(search) {
-        let currentIngredient = this.ingredients;
-        for (let i = 0; i < currentIngredient.length; i++) {
-            //console.log(currentIngredient[i].ingredient)
-            if (currentIngredient[i].ingredient.toLowerCase().includes(search.toLowerCase())) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+    // isMatchDescription(search) {
+    //     return this.description.toLowerCase().includes(search.toLowerCase());
+    // }
 
-    isMatchDescription(search) {
-        if (this.description.toLowerCase().includes(search.toLowerCase())) {
-            return true;
-        } else {
-            return false;
+    seedTags() {
+        const setIng = new Set;
+        const setApp = new Set;
+        const setUst = new Set;
+
+        let ingredients = this.ingredients;
+        for(let i = 0; i < ingredients.length; i++) {
+            let recipeIngredient = ingredients[i].ingredient;
+            setIng.add(recipeIngredient);
         }
+
+        let appliance = this.appliance;
+        setApp.add(appliance);
+
+        let ustencils = this.ustensils;
+        for(let i = 0; i < ustencils.length; i++) {
+            let recipeustencils = ustencils[i];
+            setUst.add(recipeustencils);
+        }
+        this.tagsIng = [...setIng];
+        this.tagsApp = [...setApp];
+        this.tagsUst = [...setUst];
     }
 
     ingredientsHTML() {

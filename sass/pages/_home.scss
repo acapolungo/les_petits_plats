@@ -1,21 +1,26 @@
 .header {
-    width: rem(1440);
-    margin: 0 auto;
-    padding: rem(42) 0;
-    display: flex;
-    justify-content: center;
+    width: 100%;
+    max-width: rem(1440);
+    min-width: rem(380);
     flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    padding: rem(42) rem(25);
+    display: flex;
     z-index: 2;
+    @include tablet {        
+    padding: rem(42) rem(100);
+    }
     &__container {
         width: 100%;
-        max-width: rem(1240);
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
     }
     &__logo {
         width: rem(268);
-        height: rem(93);
+        padding: rem(30) 0;
         margin-bottom: rem(17);
         img {
             width: 100%;
@@ -43,24 +48,27 @@
         }
         &__tags {
             width: 100%;
-            height: rem(40);
+            min-height: max-content;
             display: flex;
-            margin: rem(10) 0;
+            flex-wrap: wrap;
+            margin-top: rem(10);
         }
         &__tagged {
             padding: rem(10) rem(10);
+            margin-bottom: rem(10);
             height: 100%;
             border-radius: rem(5);
             color: #ffffff;
             display: flex;
             justify-content: center;
-            &--ingredients {
+            margin-right: rem(15);
+            &--ing {
                 background-color: $color-secondary-1;
             }
-            &--appliance {
+            &--app {
                 background-color: $color-secondary-2;
             }
-            &--ustensils {
+            &--ust {
                 background-color: $color-secondary-3;
             }
         }
@@ -68,19 +76,33 @@
             width: 100%;
             display: flex;
             flex-wrap: wrap;
-            justify-content: flex-start;
             position: relative;
+            justify-content: center;
+            @include tablet {
+                justify-content: flex-start;
+            }
         }
         &__ingredients, &__appliance, &__ustensils {
-            width: auto;
+            width: 100%;
             transition: width 0.1s ease;
-            margin-right: rem(20);
-            pointer-events:none;
+            pointer-events: none;
+            margin: rem(10) 0;
+            @include tablet {
+                margin-right: rem(20);
+                width: auto;
+                padding: 0;
+            }
+            &--disable {
+                pointer-events: auto;
+            }
+            &active {
+                width: rem(667);
+            }
         }
         &__filter {
             width: 100%;
             cursor: pointer;
-            width: rem(192);
+            width: 100%;
             height: rem(64);
             position: relative;
             display: flex;
@@ -89,6 +111,9 @@
             color: white;
             border-radius: 3px;
             transition: width 0.1s ease;
+            @include tablet {
+                width: rem(192);
+            }
             :hover {
                 opacity: 1;
             }
@@ -101,29 +126,29 @@
             &--ustensils {
                 background: $color-secondary-3;
             }
-        }
-        &__open {
-            width: rem(667);
-        }
-        &__openfilter {
-            width: 100%;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            .search__label {
-                opacity: 0;
-                width: 0;
-                visibility: hidden;
-            }
-            .search__input {
+            &.active {
                 width: 100%;
-                opacity: 1;
-                visibility: visible;
-            }
-            ~ .search__list {
-                display: flex;
-                width: rem(667);
-                opacity: 1;
-                visibility: visible;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                .search__label {
+                    opacity: 0;
+                    width: 0;
+                    visibility: hidden;
+                }
+                .search__input {
+                    width: 100%;
+                    opacity: 1;
+                    visibility: visible;
+                }
+                ~ .search__list {
+                    display: flex;
+                    width: 100%;
+                    opacity: 1;
+                    visibility: visible;
+                    @include tablet {
+                        width: rem(667);
+                    }
+                }
             }
         }
         &__label {
@@ -146,7 +171,8 @@
             color: #ffffff;
             &::placeholder {
                 color: #ffffff; 
-                opacity: 0.5;  
+                opacity: 0.5;
+                text-transform: capitalize;
             }
             &--ingredients {
                 background: $color-secondary-1;
@@ -205,33 +231,45 @@
         }
         &__item {
             padding: rem(10) rem(19);
-            flex-basis: 33%;
+            flex-basis: 100%;
             position: relative;
             display: block;
             color: #ffffff;
             transition: all 0.1s;
             cursor: pointer;
+            @include tablet {
+                flex-basis: 33%;
+            }
         }
     }
 }
 
 .main {
-    width: rem(1440);
+    max-width: rem(1440);
+    min-width: rem(380);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-    padding: 0 rem(100);
+    padding: 0 rem(20);
+    @include tablet {
+        padding: 0 rem(100);
+    }
     &__result {
         width: 100%;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: rem(30);
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(rem(340), 1fr));
+        grid-gap: rem(20);
+        justify-items: center;
+    }
+    &__empty {
+        font-size: rem(30);
+        color: $color-primary;
     }
 
     .recipes {
         width: rem(380);
+        min-width: rem(340);
         height: rem(364);
         display: flex;
         flex-direction: column;
@@ -258,7 +296,7 @@
             display: flex;
             font-size: rem(18);
             font-weight: 400;
-            padding-bottom: rem(20);
+            padding-bottom: rem(5);
             justify-content: space-between;
         }
         &__name {
@@ -273,9 +311,11 @@
         &__right {
             display: flex;
             flex-direction: column;
-            width: 50%;
-            overflow: hidden;
+            width: 45%;
             text-overflow: ellipsis;
+        }
+        &__right {
+            width: 55%;
         }
         &__ingr {
             font-size: rem(12);
@@ -293,10 +333,11 @@
             font-size: rem(12);
             line-height: 1.3;
             font-weight: 400;
-            padding-left: rem(5);
+            padding-left: rem(10);
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 7;
+            overflow: hidden;
         }
     }
 }

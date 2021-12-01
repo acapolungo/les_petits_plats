@@ -8,8 +8,8 @@ html, body {
     font-size: $base-font-size;
     background: $color-bg;
     font-family: $font-fam;
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     min-height: 100vh;
     scroll-behavior: smooth;
 }
