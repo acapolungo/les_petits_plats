@@ -31,6 +31,9 @@ const ustContainer = document.querySelector('.search__ustensils');
 const allIngredientsTagsListCont = document.querySelector('#ingredientsList');
 const allAppliancesTagsListCont = document.querySelector('#applianceList');
 const allUstensilsTagsListCont = document.querySelector('#ustensilsList');
+const ingredientsInputCont = document.querySelector('#ingredientsInput');
+const appliancesInputCont = document.querySelector('#applianceInput');
+const ustensilsInputCont = document.querySelector('#ustensilsInput');
 
 /* ============================= Créer la classe recette ============================= */
 
@@ -342,7 +345,6 @@ function openAdvancedList() {
             document.querySelector('#ustensilsInput').focus();
         }
     }
-
     // if (!document.querySelector('.active')) {
     //     if (this === ingContainer) {
     //         this.classList.toggle('active');

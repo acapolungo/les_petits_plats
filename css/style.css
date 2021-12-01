@@ -190,7 +190,7 @@ a a:hover {
 .header .search__filter.active .search__label {
   opacity: 0;
   width: 0;
-  visibility: visible;
+  visibility: hidden;
 }
 .header .search__filter.active .search__input {
   width: 100%;
@@ -318,7 +318,7 @@ a a:hover {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(21.25rem, 1fr));
-  grid-gap: 1.25rem;
+  grid-gap: 3.125rem;
   justify-items: center;
 }
 .main__empty {

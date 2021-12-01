@@ -259,7 +259,7 @@
         width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(rem(340), 1fr));
-        grid-gap: rem(20);
+        grid-gap: rem(50);
         justify-items: center;
     }
     &__empty {
