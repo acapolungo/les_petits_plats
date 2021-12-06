@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -17,7 +17,7 @@
     <header class="header">
         <section class="header__container">
             <div class="header__logo">
-                <a href="index.html"><img src="images/lespetitsplats.svg" alt="Logo les petits plats" ></a>
+                <a href="index.html"><img src="images/lespetitsplats.svg" alt="Logo les petits plats"></a>
             </div>
             <section class="search">
                 <input class="search__bar" type="text"
@@ -31,26 +31,29 @@
                 <section class="search__ingredients">
                     <div class="search__filter search__filter--ingredients">
                         <span id="ingredientsFilter" class="search__label">Ingrédients</span>
-                        <input id ="ingredientsInput" class="search__input search__input--ingredients" placeholder="Ingrédients" type="text" >
+                        <input id="ingredientsInput" class="search__input search__input--ingredients"
+                            placeholder="Ingrédients" type="text">
                         <div class="search__arrow"></div>
                     </div>
-                    <ul id="ingredientsList" class="search__list search__list--ingredients"></ul>
+                    <ul id="ingredientsList" data-list-type="ing" class="search__list search__list--ingredients"></ul>
                 </section>
                 <section class="search__appliance">
                     <div class="search__filter search__filter--appliance">
                         <span id="applianceFilter" class="search__label">Appareils</span>
-                        <input id ="applianceInput" class="search__input search__input--appliance" placeholder="Appareils" type="text">
+                        <input id="applianceInput" class="search__input search__input--appliance"
+                            placeholder="Appareils" type="text">
                         <div class="search__arrow"></div>
                     </div>
-                    <ul id="applianceList" class="search__list search__list--appliance"></ul>
+                    <ul id="applianceList" data-list-type="app" class="search__list search__list--appliance"></ul>
                 </section>
                 <section class="search__ustensils">
                     <div class="search__filter search__filter--ustensils">
                         <span id="ustensilsFilter" class="search__label">Ustensiles</span>
-                        <input id ="ustensilsInput" class="search__input search__input--ustensils" placeholder="Ustensiles" type="text">
+                        <input id="ustensilsInput" class="search__input search__input--ustensils"
+                            placeholder="Ustensiles" type="text">
                         <div class="search__arrow"></div>
                     </div>
-                    <ul id="ustensilsList" class="search__list search__list--ustensils"></ul>
+                    <ul id="ustensilsList" data-list-type="ust" class="search__list search__list--ustensils"></ul>
                 </section>
             </section>
         </section>
@@ -58,22 +61,6 @@
     </header>
     <main class="main">
         <section class="main__result">
-            <!-- <section class="recipes">
-                <div class="recipes__img"></div>
-                <div class="recipes__info">
-                    <div class="recipes__left">
-                        <p class="recipes__title">Limonade de coco</p>
-                        <p class="recipes__ingr">Lait de coco:<span> 400ml</span></p>
-                        <Jus class="recipes__ingr">Jus de citron: 2l</p>
-                        <Créme class="recipes__ingr">Créme de coco: 4 cuillèresl</p>
-                        <Sucre: class="recipes__ingr">Sucre: 20gl</p>
-                        <Glaçons: class="recipes__ingr">Glaçons: 2l</p>
-                    </div>
-                    <div class="recipes__right">
-                        <p class="recipes__time">10 min</p>
-                        <p class="recipes__txt">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
-                    </div>
-                </div></section> -->
         </section>
     </main>
 
@@ -81,3 +68,19 @@
 </body>
 
 </html>
+<!-- <section class="recipes">
+    <div class="recipes__img"></div>
+    <div class="recipes__info">
+        <div class="recipes__left">
+            <p class="recipes__title">Limonade de coco</p>
+            <p class="recipes__ingr">Lait de coco:<span> 400ml</span></p>
+            <Jus class="recipes__ingr">Jus de citron: 2l</p>
+            <Créme class="recipes__ingr">Créme de coco: 4 cuillèresl</p>
+            <Sucre: class="recipes__ingr">Sucre: 20gl</p>
+            <Glaçons: class="recipes__ingr">Glaçons: 2l</p>
+        </div>
+        <div class="recipes__right">
+            <p class="recipes__time">10 min</p>
+            <p class="recipes__txt">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+        </div>
+    </div></section> -->

@@ -222,6 +222,7 @@ function selectTag({ target }) {
     //   a. filtrage des recettes
     //   b. rafraichissement des tags selectionnable (available)
     //   c. rafraichissement des recettes affichées
+
     addSelectedTagToCollectionOfSelectedTags(selectedTag, tagType(tagContainer));
     renderSelectedTags(recipesFilteredByTags, tagContainer, selectedTag);
     refreshRecipesFilteredByTags(recipesFilteredBySearch, selectedTags);
@@ -239,13 +240,13 @@ function deleteTag(event) {
         filteredResult();
         renderRecipesFiltered(recipesFilteredByTags);
     } else {
-        renderRecipesFiltered(recipesFilteredBySearch)
+        renderRecipesFiltered(recipesFilteredBySearch);
     }
 };
 
 function renderRecipesFiltered(recipesFiltered) {
     renderRecipesHTML(recipesFiltered);
-    refreshSelectableTags(recipesFiltered)
+    refreshSelectableTags(recipesFiltered);
     renderAvailableTags(allIngredientsTagsList, allAppliancesTagsList, allUstensilsTagsList);
 }
 
@@ -266,15 +267,17 @@ function addSelectedTagToCollectionOfSelectedTags(selectedTag, selectedTagType) 
 }
 
 function tagType(tagContainer) {
-    switch (tagContainer.id) {
-        case "ingredientsList":
-            return 'ing';
-        case "applianceList":
-            return 'app';
-        case "ustensilsList":
-            return 'ust';
-        // no default really required here
-    }
+    console.log(tagContainer.dataset.listType)
+    return tagContainer.dataset.listType;
+    // switch (tagContainer.id) {
+    //     case "ingredientsList":
+    //         return 'ing';
+    //     case "applianceList":
+    //         return 'app';
+    //     case "ustensilsList":
+    //         return 'ust';
+    //     // no default really required here
+    // }
 }
 
 /* ============================= Rendus des recettes et des listes ============================= */
@@ -312,10 +315,10 @@ function renderSelectedTags() {
     selectedTags.forEach((type, tag) => {
         const selectedTagHTML = `<span class="search__tagged search__tagged--${type}">${tag}<button class="delete">x</button></span>`;
 
-        selectedTagsHTML.push(selectedTagHTML)
+        selectedTagsHTML.push(selectedTagHTML);
     })
 
-    selectedTagsContainer.innerHTML = selectedTagsHTML.join('')
+    selectedTagsContainer.innerHTML = selectedTagsHTML.join('');
     document.querySelectorAll('.delete').forEach(btn => btn.addEventListener('click', deleteTag));
 }
 
@@ -326,9 +329,9 @@ function openAdvancedList() {
     ingContainer.classList.remove('active');
     appContainer.classList.remove('active');
     ustContainer.classList.remove('active');
-    ingContainer.childNodes[1].classList.remove('active')
-    appContainer.childNodes[1].classList.remove('active')
-    ustContainer.childNodes[1].classList.remove('active')
+    ingContainer.childNodes[1].classList.remove('active');
+    appContainer.childNodes[1].classList.remove('active');
+    ustContainer.childNodes[1].classList.remove('active');
     if (!isActive) {
         this.classList.add('active');
         this.childNodes[1].classList.add('active');
@@ -345,6 +348,7 @@ function openAdvancedList() {
             document.querySelector('#ustensilsInput').focus();
         }
     }
+    
     // if (!document.querySelector('.active')) {
     //     if (this === ingContainer) {
     //         this.classList.toggle('active');
