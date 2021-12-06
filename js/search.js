@@ -16,14 +16,6 @@ function isMatchIngredient(recipe, search) {
             return false;
         }
     })
-    //let match = false;
-    // for (let i = 0; i < currentIngredient.length; i++) {
-    //     if (currentIngredient[i].ingredient.toLowerCase().includes(search.toLowerCase())) {
-    //         match = true;
-    //         break;
-    //     }
-    // }
-    //return match;
 }
 
 function isMatchDescription(recipe, search) {
@@ -31,16 +23,18 @@ function isMatchDescription(recipe, search) {
 }
 
 export function foundRecipes(recipes, search) {
-    const firstFilteredRecipes = [];
-    // changer en filter
-    recipes.forEach(recipe => {
-        if (isMatch(recipe, search)) {
-            firstFilteredRecipes.push(recipe);
-        };
-    });
-
-    return firstFilteredRecipes;
-};
+    let firstFilteredRecipes = [];
+    // En filter
+    return firstFilteredRecipes = recipes.filter(recipe => (isMatch(recipe, search)));
+ 
+    // En ForEach
+    // recipes.forEach(recipe => {
+    //     if (isMatch(recipe, search)) {
+    //         firstFilteredRecipes.push(recipe);
+    //     }
+    // });
+    // return firstFilteredRecipes;
+}
 
 /* ============================= La recherche avancée ============================= */
 
