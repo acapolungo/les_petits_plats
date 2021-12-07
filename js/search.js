@@ -25,8 +25,8 @@ function isMatchDescription(recipe, search) {
 export function foundRecipes(recipes, search) {
     let firstFilteredRecipes = [];
     // En filter
-    return firstFilteredRecipes = recipes.filter(recipe => (isMatch(recipe, search)));
- 
+    firstFilteredRecipes = recipes.filter(recipe => (isMatch(recipe, search)));
+    return firstFilteredRecipes;
     // En ForEach
     // recipes.forEach(recipe => {
     //     if (isMatch(recipe, search)) {
@@ -52,6 +52,6 @@ export function refreshRecipesFilteredByTags(recipesFilteredBySearch, selectedTa
         if (type === 'ust') {
             refreshedRecipesFilteredByTags = refreshedRecipesFilteredByTags.filter(recipe => recipe.tagsUst.find(currentRecipeTag => currentRecipeTag.toLowerCase() === selectedTag.toLowerCase()));
         }
-    })
+    });
     return refreshedRecipesFilteredByTags;
 }

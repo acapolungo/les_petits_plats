@@ -30,10 +30,12 @@ const ustContainer = document.querySelector('.search__ustensils');
 const allIngredientsTagsListCont = document.querySelector('#ingredientsList');
 const allAppliancesTagsListCont = document.querySelector('#applianceList');
 const allUstensilsTagsListCont = document.querySelector('#ustensilsList');
+const searchIng = document.querySelector('#ingredientsInput');
+const searchApp = document.querySelector('#applianceInput');
+const searchUst = document.querySelector('#ustensilsInput');
 
 /* ============================= Créer la classe recette ============================= */
 
-// creation de la classe recette
 const instantiatedRecipes = recipes => recipes.map(recipe => new Recipe(recipe));
 const allRecipes = instantiatedRecipes(recipes);
 console.log(allRecipes);
@@ -260,8 +262,9 @@ function renderSelectedTags() {
     document.querySelectorAll('.delete').forEach(btn => btn.addEventListener('click', deleteTag));
 }
 
-/* ============================= Gestion de l'ouverture des listes en toggle ============================= */
+/* ============================= Gestion des listes avancées ============================= */
 
+// 1/ Ouverture
 function openAdvancedList() {
     let isActive = this.classList.contains('active');
     ingContainer.classList.remove('active');
@@ -290,13 +293,44 @@ function openAdvancedList() {
         document.querySelectorAll('.search__item').forEach(item => {
             item.addEventListener('click', selectTag);
         });
+        searchIng.addEventListener('keyup', searchfunction, false);
+        searchApp.addEventListener('keyup', searchfunction, false);
+        searchUst.addEventListener('keyup', searchfunction, false);
     } else {
         document.querySelectorAll('.search__item').forEach(item => {
             item.removeEventListener('click', selectTag);
         });
+        searchIng.removeEventListener('keyup', searchfunction, false);
+        searchApp.removeEventListener('keyup', searchfunction, false);
+        searchUst.removeEventListener('keyup', searchfunction, false);
     }
 }
 
 ingContainer.addEventListener('click', openAdvancedList);
 appContainer.addEventListener('click', openAdvancedList);
 ustContainer.addEventListener('click', openAdvancedList);
+
+// 2/ Recherches
+function searchfunction(e) {
+    let searchbarValue = e.target.value.toLowerCase();
+    // let list = e.target.parentNode.parentNode.childNodes[3].childNodes
+    // console.log(list);
+    let items
+    if (e.target.id === 'ingredientsInput') {
+        items = allIngredientsTagsListCont.childNodes;
+    }
+    if (e.target.id === 'applianceInput') {
+        items = allAppliancesTagsListCont.childNodes;
+    }
+    if (e.target.id === 'ustensilsInput') {
+        items = allUstensilsTagsListCont.childNodes;
+    }
+    items.forEach(item => {
+        let itemList = item.innerText.toLowerCase();
+        if (itemList.includes(searchbarValue)) {
+            item.classList.remove('search__item--disable');
+        } else {
+            item.classList.add('search__item--disable');
+        }
+    })
+}
