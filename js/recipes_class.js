@@ -48,16 +48,16 @@ export class Recipe {
         let ingredients = this.ingredients;
         for(let i = 0; i < ingredients.length; i++) {
             let recipeIngredient = ingredients[i].ingredient;
-            setIng.add(recipeIngredient);
+            setIng.add(recipeIngredient.toLowerCase());
         }
 
         let appliance = this.appliance;
-        setApp.add(appliance);
+        setApp.add(appliance.toLowerCase());
 
         let ustencils = this.ustensils;
         for(let i = 0; i < ustencils.length; i++) {
             let recipeustencils = ustencils[i];
-            setUst.add(recipeustencils);
+            setUst.add(recipeustencils.toLowerCase());
         }
         this.tagsIng = [...setIng];
         this.tagsApp = [...setApp];

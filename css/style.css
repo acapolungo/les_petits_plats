@@ -299,6 +299,9 @@ a a:hover {
     flex-basis: 33%;
   }
 }
+.header .search__item--disable {
+  display: none;
+}
 
 .main {
   max-width: 90rem;
