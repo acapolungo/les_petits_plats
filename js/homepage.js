@@ -317,7 +317,6 @@ ustContainer.addEventListener('click', openAdvancedList);
 // 2/ Recherches
 function searchfunction(e) {
     let searchbarValue = e.target.value.toLowerCase();
-    // let list = e.target.parentNode.parentNode.childNodes[3].childNodes
     // console.log(list);
     let items
     if (e.target.id === 'ingredientsInput') {

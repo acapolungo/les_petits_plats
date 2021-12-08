@@ -6,20 +6,12 @@ export function isMatch(recipe, search) {
 }
 
 function isMatchTitle(recipe, search) {
-    // if(recipe.name.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
-    //     console.log(recipe)
-    //     return true;
-    // }
     return recipe.name.toLowerCase().includes(search.toLowerCase());
 }
 
 function isMatchIngredient(recipe, search) {
     const currentIngredient = recipe.ingredients;
-    // currentIngredient.every(elt => {
-    //     if(elt.ingredient.toLowerCase().includes(search.toLowerCase())) {
-    //         return false;
-    //     }
-    // })
+
     let match = false;
     for (const currentElt of currentIngredient) {
         if (currentElt.ingredient.toLowerCase().includes(search.toLowerCase())) {
@@ -27,12 +19,6 @@ function isMatchIngredient(recipe, search) {
             break;
         } 
     }
-    // for (let i = 0; i < currentIngredient.length; i++) {
-    //     if (currentIngredient[i].ingredient.toLowerCase().includes(search.toLowerCase())) {
-    //         match = true;
-    //         break;
-    //     }
-    // }
     return match;
 }
 
@@ -48,12 +34,6 @@ export function foundRecipes(recipes, search) {
             firstFilteredRecipes.push(currentRecipe);
         }
     }
-    // changer en filter
-    // recipes.forEach(recipe => {
-    //     if (isMatch(recipe, search)) {
-    //         firstFilteredRecipes.push(recipe);
-    //     };
-    // });
     return firstFilteredRecipes;
 }
 
@@ -61,7 +41,6 @@ export function foundRecipes(recipes, search) {
 
 export function refreshRecipesFilteredByTags(recipesFilteredBySearch, selectedTags) {
     // un tableau temporaire va filtrer les recherche suivant le tag selectionné
-    // console.log(selectedTags)
 
     let refreshedRecipesFilteredByTags = recipesFilteredBySearch;
 
@@ -70,7 +49,6 @@ export function refreshRecipesFilteredByTags(recipesFilteredBySearch, selectedTa
     for (let [name, type] of selectedTags) {
         tagType = type;
         tagName = name.toLowerCase();
-        //console.log([name, type])
         const searchRecipe = [];
 
         if (tagType === 'ing') {
@@ -85,7 +63,6 @@ export function refreshRecipesFilteredByTags(recipesFilteredBySearch, selectedTa
                 }
             }
         }
-
         if (tagType === 'app') {
             for (let i = 0; i < refreshedRecipesFilteredByTags.length; i++) {
                 const currentRecipe = refreshedRecipesFilteredByTags[i];
@@ -98,7 +75,6 @@ export function refreshRecipesFilteredByTags(recipesFilteredBySearch, selectedTa
                 }
             }
         }
-
         if (tagType === 'ust') {
             for (let i = 0; i < refreshedRecipesFilteredByTags.length; i++) {
                 const currentRecipe = refreshedRecipesFilteredByTags[i];
@@ -114,16 +90,5 @@ export function refreshRecipesFilteredByTags(recipesFilteredBySearch, selectedTa
         // console.log(searchRecipe)
         refreshedRecipesFilteredByTags = searchRecipe;
     }
-    // selectedTags.forEach((type, selectedTag) => {
-    //     if (type === 'ing') {
-    //         refreshedRecipesFilteredByTags = refreshedRecipesFilteredByTags.filter(recipe => recipe.tagsIng.find(currentRecipeTag => currentRecipeTag.toLowerCase() === selectedTag.toLowerCase()));
-    //     }
-    //     if (type === 'app') {
-    //         refreshedRecipesFilteredByTags = refreshedRecipesFilteredByTags.filter(recipe => recipe.tagsApp.find(currentRecipeTag => currentRecipeTag.toLowerCase() === selectedTag.toLowerCase()));
-    //     }
-    //     if (type === 'ust') {
-    //         refreshedRecipesFilteredByTags = refreshedRecipesFilteredByTags.filter(recipe => recipe.tagsUst.find(currentRecipeTag => currentRecipeTag.toLowerCase() === selectedTag.toLowerCase()));
-    //     }
-    // })
     return refreshedRecipesFilteredByTags;
 }
