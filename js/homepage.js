@@ -38,7 +38,7 @@ const searchUst = document.querySelector('#ustensilsInput');
 
 const instantiatedRecipes = recipes => recipes.map(recipe => new Recipe(recipe));
 const allRecipes = instantiatedRecipes(recipes);
-console.log(allRecipes);
+//console.log(allRecipes);
 renderRecipesHTML(allRecipes);
 
 /* ============================= Mise à jour des listes ============================= */
@@ -111,7 +111,9 @@ function isValidSearch(search) {
 }
 
 function searchResult(search) {
-    recipesFilteredBySearch = foundRecipes(allRecipes, search);
+    console.time();
+    recipesFilteredBySearch = foundRecipes(allRecipes, search); 
+    console.timeEnd();
 }
 
 function displayValidSearchResult() {

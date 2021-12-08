@@ -15,7 +15,7 @@ function isMatchIngredient(recipe, search) {
         if(elt.ingredient.toLowerCase().includes(search.toLowerCase())) {
             return false;
         }
-    })
+    });
 }
 
 function isMatchDescription(recipe, search) {
