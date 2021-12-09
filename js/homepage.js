@@ -113,7 +113,9 @@ function isValidSearch(search) {
 }
 
 function searchResult(search) {
+    console.time("Test #2 Array pour la première recherche");
     recipesFilteredBySearch = foundRecipes(allRecipes, search);
+    console.timeEnd("Test #2 Array pour la première recherche");
 }
 
 function displayValidSearchResult() {
