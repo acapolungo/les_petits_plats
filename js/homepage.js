@@ -111,9 +111,9 @@ function isValidSearch(search) {
 
 
 function searchResult(search) {
-    console.time("Test de la première recherche");
+    console.time("Test #1 Methode array");
     recipesFilteredBySearch = foundRecipes(allRecipes, search);
-    console.timeEnd("Test de la première recherche");
+    console.timeEnd("Test #1 Methode array");
 }
 
 function displayValidSearchResult() {
