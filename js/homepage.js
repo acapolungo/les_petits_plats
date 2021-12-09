@@ -97,7 +97,6 @@ function clearResults() {
 
 function getResults({ target: { value: search } }) {
     clearResults();
-
     if (isValidSearch(search)) {
         searchResult(search);
         displayValidSearchResult()
@@ -110,10 +109,11 @@ function isValidSearch(search) {
     return search.length >= 3;
 }
 
+
 function searchResult(search) {
-    console.time();
-    recipesFilteredBySearch = foundRecipes(allRecipes, search); 
-    console.timeEnd();
+    console.time("Test de la première recherche");
+    recipesFilteredBySearch = foundRecipes(allRecipes, search);
+    console.timeEnd("Test de la première recherche");
 }
 
 function displayValidSearchResult() {
