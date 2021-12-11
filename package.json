@@ -1,0 +1,19 @@
+{
+  "name": "les-petits-plats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acapolungo/adriencapolungo_7_05102021.git"
+  },
+  "author": "adrien capolungo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acapolungo/adriencapolungo_7_05102021/issues"
+  },
+  "homepage": "https://github.com/acapolungo/adriencapolungo_7_05102021#readme"
+}

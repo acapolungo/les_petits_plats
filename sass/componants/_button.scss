@@ -1,0 +1,13 @@
+.delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(20);
+    height: rem(20);
+    border-radius: 50%;
+    color: lighten($color-secondary-1, 80%);;
+    margin: 0 0 0 rem(10);
+    border: 1px solid lighten($color-secondary-1, 20%);
+    background-color: transparent;
+    cursor: pointer;
+}

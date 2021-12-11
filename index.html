@@ -1,0 +1,83 @@
+    <!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les petits plats</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2fbf37b732.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <section class="header__container">
+            <div class="header__logo">
+                <a href="index.html"><img src="images/lespetitsplats.svg" alt="Logo les petits plats" ></a>
+            </div>
+            <section class="search">
+                <input class="search__bar" type="text"
+                    placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" id="maRecherche"
+                    name="q" aria-label="Chercher parmi les recettes">
+            </section>
+
+            <section class="search__tags"></section>
+
+            <section class="search__filtercontainer">
+                <section class="search__ingredients">
+                    <div class="search__filter search__filter--ingredients">
+                        <span id="ingredientsFilter" class="search__label">Ingrédients</span>
+                        <input id ="ingredientsInput" class="search__input search__input--ingredients" placeholder="Ingrédients" type="text" >
+                        <div class="search__arrow"></div>
+                    </div>
+                    <ul id="ingredientsList" data-list-type="ing" class="search__list search__list--ingredients"></ul>
+                </section>
+                <section class="search__appliance">
+                    <div class="search__filter search__filter--appliance">
+                        <span id="applianceFilter" class="search__label">Appareils</span>
+                        <input id ="applianceInput" class="search__input search__input--appliance" placeholder="Appareils" type="text">
+                        <div class="search__arrow"></div>
+                    </div>
+                    <ul id="applianceList" data-list-type="app" class="search__list search__list--appliance"></ul>
+                </section>
+                <section class="search__ustensils">
+                    <div class="search__filter search__filter--ustensils">
+                        <span id="ustensilsFilter" class="search__label">Ustensiles</span>
+                        <input id ="ustensilsInput" class="search__input search__input--ustensils" placeholder="Ustensiles" type="text">
+                        <div class="search__arrow"></div>
+                    </div>
+                    <ul id="ustensilsList" data-list-type="ust" class="search__list search__list--ustensils"></ul>
+                </section>
+            </section>
+        </section>
+
+    </header>
+    <main class="main">
+        <section class="main__result">
+            <!-- <section class="recipes">
+                <div class="recipes__img"></div>
+                <div class="recipes__info">
+                    <div class="recipes__left">
+                        <p class="recipes__title">Limonade de coco</p>
+                        <p class="recipes__ingr">Lait de coco:<span> 400ml</span></p>
+                        <Jus class="recipes__ingr">Jus de citron: 2l</p>
+                        <Créme class="recipes__ingr">Créme de coco: 4 cuillèresl</p>
+                        <Sucre: class="recipes__ingr">Sucre: 20gl</p>
+                        <Glaçons: class="recipes__ingr">Glaçons: 2l</p>
+                    </div>
+                    <div class="recipes__right">
+                        <p class="recipes__time">10 min</p>
+                        <p class="recipes__txt">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                    </div>
+                </div></section> -->
+        </section>
+    </main>
+
+    <script type="module" src="js/homepage.js"></script>
+</body>
+
+</html>
