@@ -1,5 +1,5 @@
 
-![alt text](https://github.com/acapolungo//adriencapolungo_7_05102021/blob/main/image.jpg?raw=true)
+![alt text](https://github.com/acapolungo/adriencapolungo_7_05102021/blob/main/images/lespetitsplats.jpg)
 
 # Les petits plats
 ## Vous êtes freelance et vous venez d’être missionné par l’entreprise “Les petits plats” en temps que Développeur Front-end pour une mission de 3 mois.
