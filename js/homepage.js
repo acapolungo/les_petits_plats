@@ -40,7 +40,7 @@ const searchUst = document.querySelector('#ustensilsInput');
 // creation de la classe recette
 const instantiatedRecipes = recipes => recipes.map(recipe => new Recipe(recipe));
 const allRecipes = instantiatedRecipes(recipes);
-console.log(allRecipes);
+//console.log(allRecipes);
 renderRecipesHTML(allRecipes);
 
 /* ============================= Mise à jour des listes ============================= */
@@ -113,9 +113,9 @@ function isValidSearch(search) {
 }
 
 function searchResult(search) {
-    console.time("Test #2 Array pour la première recherche");
+    console.time("Test #2 For Natif");
     recipesFilteredBySearch = foundRecipes(allRecipes, search);
-    console.timeEnd("Test #2 Array pour la première recherche");
+    console.timeEnd("Test #2 For Natif");
 }
 
 function displayValidSearchResult() {
